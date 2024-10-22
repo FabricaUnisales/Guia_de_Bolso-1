@@ -1,0 +1,45 @@
+<div class="container mt-5" style="background-color: #4CAF50; padding: 20px; border-radius: 10px;">
+  <div class="row">
+    <div class="row mt-3">
+      <div class="col-md-12">
+<form action="/admin/exportar-admins" method="GET" class="form-inline mb-3">
+  <div class="form-group">
+    <label for="datacriacao" class="text-white" style="margin-right: 10px;">Exportar Por Data de Criação:</label>
+    <input type="text" class="form-control" id="datacriacao" name="datacriacao" placeholder="dd/mm/aaaa" style="width: 100px;">
+  </div>
+  <button type="submit" class="btn btn-success" style="background-color: darkgreen;">Exportar para Excel</button>
+</form>
+<form action="/admin/excluir-usuarios-negativos" method="POST">
+      <button type="submit" class="btn btn-danger mb-4">Excluir Usuários com -1 Ponto</button>
+    </form>
+      </div>
+    </div>
+</div>
+    
+  {{#if admins.length}}
+    <div class="row">
+      {{#each admins}}
+        <div class="col-md-4 mb-4">
+          <div class="card bg-light">
+            <div class="card-body">
+              <p class="card-text">Nome: {{nome}}</p>
+              <p class="card-text">Data de nascimento: {{nascimento}}</p>
+              <p class="card-text">Data De Criação: {{datacriacao}}</p>
+              <p class="card-text">Pontos: {{pontuacao}}</p>
+              <form action="/admin/homeadm/delete" method="POST" >
+                <input type="hidden" name="id" value="{{_id}}">
+                <button type="submit" class="btn btn-danger mt-2">Deletar</button>
+  </form>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="text-white">Nenhum usuário registrado</h4>
+      </div>
+    </div>
+  {{/if}}
+</div>
